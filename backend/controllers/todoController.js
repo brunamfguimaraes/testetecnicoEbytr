@@ -7,11 +7,9 @@ router.put('/:id', async (req, res) => {
   const { task } = req.body;
     try {
       const result = await todoModel.updateTask({ id, task });
-    console.log(result, 'Controller')
-
-    res.status(200).json(result);
+      res.status(200).json(result);
   } catch (err) {
-    res.status(500).send({ message: 'Algo deu errado' });
+      res.status(500).send({ message: 'Algo deu errado' });
   }
 });
 

@@ -1,4 +1,5 @@
 import './App.css';
+import React from 'react';
 import Tarefa from './components/Tarefa';
 import { useState, useEffect } from 'react';
 
@@ -9,8 +10,17 @@ const [tasks, setTasks] = useState([]);
 function getData() {
   fetch('http://localhost:3000/todo', { method: "GET"})
   .then(response => response.json())
-  .then(data => setTasks(data));
-};
+  .then(data => setTasks(data))
+}
+function inserirTarefa() {
+  fetch('http://localhost:3000/todo',
+  {
+    method: "POST",
+    headers: { 'Content-Type': "application/json"},
+    body: JSON.stringify({ "task": ""})})
+  .then(response => response.json())
+  .then(() => getData())
+}
 
 useEffect(() => {
   getData();
@@ -21,15 +31,15 @@ useEffect(() => {
     <div className="App">
       <h1>Organizador de Tarefas</h1>
 
-      {tasks.map(task => {
-        return <Tarefa task={task} />
-      })}
+      { tasks.map(task => {
+        return < Tarefa task={task} key={task._id}/>
+      }) }
 
       <button>Todas as tarefas</button>
       <button>Tarefas pendentes</button>
       <button>Tarefas concluídos</button>
 
-      <button>Inserir Nova Tarefa</button>
+      <button onClick={ inserirTarefa }>Inserir Nova Tarefa</button>
     </div>
   );
 }
