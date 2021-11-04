@@ -4,15 +4,13 @@ import { useState, useEffect } from 'react';
 
 function App() {
 
-const [tasks, setTasks] = useState(
-  []
-)
+const [tasks, setTasks] = useState([]);
 
 function getData() {
   fetch('http://localhost:3000/todo', { method: "GET"})
   .then(response => response.json())
-  .then(data => setTasks(data))
-}
+  .then(data => setTasks(data));
+};
 
 useEffect(() => {
   getData();
