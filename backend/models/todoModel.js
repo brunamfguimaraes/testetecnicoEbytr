@@ -8,17 +8,17 @@ const getAllList = async () => {
 return result;
 };
 
-const addNewTask = async (task) => {
+const addNewTask = async ({ task }) => {
   const db = await connection();
-  const addTask = await db.collection('to_do_list').insertOne(task);
+  const addTask = await db.collection('to_do_list').insertOne({ task });
   return addTask;
 };
 
-const updateTask = async (id) => {
-  const db = await connection();
+const updateTask = async ({ id, task }) => {
   if(!ObjectId.isValid(id)) return null;
-  const task = await db.collection('to_do_list').updateOne({ _id: ObjectId(id) }, { $set: task });
-  return task;
+  const db = await connection();
+  const result = await db.collection('to_do_list').updateOne({ _id: ObjectId(id) }, { $set: { task } });
+  return result;
 };
 
 const excludeTask = async (id) => {
