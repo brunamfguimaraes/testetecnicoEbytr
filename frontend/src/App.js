@@ -1,23 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import Tarefa from './components/Tarefa';
+import { useState, useEffect } from 'react';
 
 function App() {
+
+const [tasks, setTasks] = useState(
+  []
+)
+
+function getData() {
+  fetch('http://localhost:3000/todo', { method: "GET"})
+  .then(response => response.json())
+  .then(data => setTasks(data))
+}
+
+useEffect(() => {
+  getData();
+}, []);
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Organizador de Tarefas</h1>
+
+      {tasks.map(task => {
+        return <Tarefa task={task} />
+      })}
+
+      <button>Todas as tarefas</button>
+      <button>Tarefas pendentes</button>
+      <button>Tarefas concluídos</button>
+
+      <button>Inserir Nova Tarefa</button>
     </div>
   );
 }
