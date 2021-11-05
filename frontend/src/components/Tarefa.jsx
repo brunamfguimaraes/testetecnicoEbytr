@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../App.css';
 
-function Tarefa({ task }) {
+function Tarefa({ task, atualizarTarefa }) {
 
   return (
-    <div className="">
-      <input type="checkbox" />
+    <div className="main">
+      <input type="checkbox" checked={ !task.active } onClick={() => {atualizarTarefa({...task, active: !task.active }) } }/>
       <span>{ task.task }</span>
       <button>Apagar</button>
   </div>
@@ -14,5 +15,6 @@ function Tarefa({ task }) {
 
 Tarefa.propTypes = {
   task: PropTypes.object,
+  atualizarTarefa: PropTypes.func,
 };
 export default Tarefa;

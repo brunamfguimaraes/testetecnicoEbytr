@@ -1,7 +1,7 @@
-import './App.css';
 import React from 'react';
 import Tarefa from './components/Tarefa';
 import { useState, useEffect } from 'react';
+import './App.css';
 
 function App() {
 
@@ -17,7 +17,18 @@ function inserirTarefa() {
   {
     method: "POST",
     headers: { 'Content-Type': "application/json"},
-    body: JSON.stringify({ "task": ""})})
+    body: JSON.stringify({ "task": "", "active": false })})
+  .then(response => response.json())
+  .then(() => getData())
+}
+
+function atualizarTarefa(task) {
+  fetch('http://localhost:3000/todo/:id',
+  {
+    method: "PUT",
+    headers: { 'Content-Type': "application/json"},
+    body: JSON.stringify(task)
+  })
   .then(response => response.json())
   .then(() => getData())
 }
@@ -29,13 +40,13 @@ useEffect(() => {
 
   return (
     <div className="App">
-      <h1>Organizador de Tarefas</h1>
+      <h1 className="h1">Organizador de Tarefas</h1>
 
       { tasks.map(task => {
-        return < Tarefa task={task} key={task._id}/>
+        return <Tarefa task={ task } key={ task._id } atualizarTarefa={ atualizarTarefa } />
       }) }
 
-      <button>Todas as tarefas</button>
+      <button className="btnAll">Todas as tarefas</button>
       <button>Tarefas pendentes</button>
       <button>Tarefas concluídos</button>
 

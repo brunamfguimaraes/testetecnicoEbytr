@@ -4,9 +4,10 @@ const router = express.Router();
 
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
-  const { task } = req.body;
+
+  const { task, active } = req.body;
     try {
-      const result = await todoModel.updateTask({ id, task });
+      const result = await todoModel.updateTask({id, task, active});
       res.status(200).json(result);
   } catch (err) {
       res.status(500).send({ message: 'Algo deu errado' });
@@ -33,10 +34,10 @@ router.get('/', async (_req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const { task } = req.body;
+  // const { document } = req.body;
 
   try {
-    const newTask = await todoModel.addNewTask({ task });
+    const newTask = await todoModel.addNewTask(req.body);
     res.status(201).json(newTask);
   } catch (err) {
     res.status(500).send({ message: 'Algo deu errado' });
