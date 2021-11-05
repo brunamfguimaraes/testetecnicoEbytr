@@ -14,6 +14,26 @@ html, body {
   margin-left: 40%;
 }
 
-.btnAll {
-  margin: auto
+.btnTodas {
+  margin-top: 5%;
+  margin-left: 25%;
+  background-color: coral;
+}
+
+.btnPend {
+  margin-top: 5%;
+  margin-left: 5%;
+  background-color:coral;
+}
+
+.btnConc {
+  margin-top: 5%;
+  margin-left: 5%;
+  background-color:coral;
+}
+
+.btnInser {
+  margin-top: 5%;
+  margin-left: 5%;
+  background-color:coral;
 }

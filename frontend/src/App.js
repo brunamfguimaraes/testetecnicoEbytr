@@ -17,17 +17,28 @@ function inserirTarefa() {
   {
     method: "POST",
     headers: { 'Content-Type': "application/json"},
-    body: JSON.stringify({ "task": "", "active": false })})
+    body: JSON.stringify({ "task": "", "active": true })})
   .then(response => response.json())
   .then(() => getData())
 }
 
-function atualizarTarefa(task) {
+function atualizarTarefa(item) {
   fetch('http://localhost:3000/todo/:id',
   {
     method: "PUT",
     headers: { 'Content-Type': "application/json"},
-    body: JSON.stringify(task)
+    body: JSON.stringify(item)
+  })
+  .then(response => response.json())
+  .then(() => getData())
+}
+
+function deletarTarefa(item) {
+  fetch('http://localhost:3000/todo/:id',
+  {
+    method: "DELETE",
+    headers: { 'Content-Type': "application/json"},
+    body: JSON.stringify(item)
   })
   .then(response => response.json())
   .then(() => getData())
@@ -43,14 +54,14 @@ useEffect(() => {
       <h1 className="h1">Organizador de Tarefas</h1>
 
       { tasks.map(task => {
-        return <Tarefa task={ task } key={ task._id } atualizarTarefa={ atualizarTarefa } />
+        return <Tarefa item={ task } key={ task._id } atualizarTarefa={ atualizarTarefa } deletarTarefa={ deletarTarefa }/>
       }) }
 
-      <button className="btnAll">Todas as tarefas</button>
-      <button>Tarefas pendentes</button>
-      <button>Tarefas concluídos</button>
+      <button className="btnTodas">Todas as tarefas</button>
+      <button className="btnPend">Tarefas pendentes</button>
+      <button className="btnConc">Tarefas concluídos</button>
 
-      <button onClick={ inserirTarefa }>Inserir Nova Tarefa</button>
+      <button onClick={ inserirTarefa } className="btnInser">Inserir Nova Tarefa</button>
     </div>
   );
 }
