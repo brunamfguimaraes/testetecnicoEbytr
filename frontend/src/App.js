@@ -14,7 +14,7 @@ function getData() {
 }
 
 function inserirTarefa() {
-  fetch('http://localhost:3000/todo',
+  fetch('http://localhost:3000/todo/add',
   {
     method: "POST",
     headers: { 'Content-Type': "application/json" },
@@ -24,7 +24,7 @@ function inserirTarefa() {
 }
 
 function atualizarTarefa(item) {
-  fetch('http://localhost:3000/todo/:id',
+  fetch('http://localhost:3000/todo/update/:id',
   {
     method: "PUT",
     headers: { 'Content-Type': "application/json"},
