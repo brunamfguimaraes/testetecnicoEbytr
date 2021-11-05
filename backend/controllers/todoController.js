@@ -4,10 +4,10 @@ const router = express.Router();
 
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
+  const { task, active, edit } = req.body;
 
-  const { task, active } = req.body;
     try {
-      const result = await todoModel.updateTask({id, task, active});
+      const result = await todoModel.updateTask({ id, task, active, edit });
       res.status(200).json(result);
   } catch (err) {
       res.status(500).send({ message: 'Algo deu errado' });
@@ -15,9 +15,9 @@ router.put('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
+
   try {
     const task = await todoModel.excludeTask(req.params.id);
-
     res.status(200).json(task);
   } catch (err) {
     res.status(500).send({ message: 'Algo deu errado' });
@@ -25,6 +25,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 router.get('/', async (_req, res) => {
+
   try {
   const products = await todoModel.getAllList();
   res.status(200).json(products);
@@ -34,7 +35,6 @@ router.get('/', async (_req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  // const { document } = req.body;
 
   try {
     const newTask = await todoModel.addNewTask(req.body);

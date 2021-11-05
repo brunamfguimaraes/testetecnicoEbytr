@@ -14,10 +14,10 @@ const addNewTask = async (document) => {
   return addTask;
 };
 
-const updateTask = async ({ id, task, active }) => {
+const updateTask = async ({ id, task, active, edit }) => {
   if(!ObjectId.isValid(id)) return null;
   const db = await connection();
-  const result = await db.collection('to_do_list').updateOne({ _id: ObjectId(id) }, { $set: { task, active } });
+  const result = await db.collection('to_do_list').updateOne({ _id: ObjectId(id) }, { $set: { task, active, edit } });
   return result;
 };
 
