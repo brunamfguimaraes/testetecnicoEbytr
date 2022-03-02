@@ -1,5 +1,7 @@
 # Este é o teste técnico Ebytr
 
+## Esse projeto foi desenvolvido como objeto de estudo na Trybe
+
 ## Instruções para rodar o projeto em sua máquina:
 
 1. Clone o projeto em um diretório na sua máquina utilizando o seguinte comando no terminal:
